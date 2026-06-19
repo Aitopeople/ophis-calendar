@@ -1,0 +1,71 @@
+{
+  "name": "ophis-calendar",
+  "version": "0.1.0",
+  "description": "독립형 React 캘린더 컴포넌트 (월/주/일/연/목록/리소스 타임라인/리소스 타임그리드)",
+  "type": "module",
+  "license": "MIT",
+  "author": "Aitopeople",
+  "homepage": "https://github.com/Aitopeople/ophis-calendar#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aitopeople/ophis-calendar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Aitopeople/ophis-calendar/issues"
+  },
+  "keywords": [
+    "react",
+    "calendar",
+    "scheduler",
+    "datepicker",
+    "timeline",
+    "resource",
+    "typescript",
+    "events"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/ophis-calendar.cjs",
+  "module": "./dist/ophis-calendar.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/ophis-calendar.js",
+      "require": "./dist/ophis-calendar.cjs"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && tsc -p tsconfig.lib.json",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^24.12.3",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^10.3.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.6.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "rrule": "^2.8.1",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.59.2",
+    "vite": "^8.0.12"
+  }
+}

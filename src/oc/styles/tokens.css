@@ -1,0 +1,54 @@
+/* src/oc/styles/tokens.css
+ * OC(Our Calendar) 디자인 토큰 (--oc-*).
+ * 테마/확장은 이 변수만 바꾸면 전체에 반영된다.
+ */
+
+:root {
+  /* Typography / surfaces */
+  --oc-small-font-size: 0.85em;
+  --oc-page-bg-color: #fff;
+  --oc-neutral-bg-color: hsla(0, 0%, 82%, 0.3);
+  --oc-neutral-text-color: grey;
+  --oc-border-color: #ddd;
+
+  /* Buttons (dark navy) */
+  --oc-button-text-color: #fff;
+  --oc-button-bg-color: #2c3e50;
+  --oc-button-border-color: #2c3e50;
+  --oc-button-hover-bg-color: #1e2b37;
+  --oc-button-hover-border-color: #1a252f;
+  --oc-button-active-bg-color: #1a252f;
+  --oc-button-active-border-color: #151e27;
+
+  /* Events */
+  --oc-event-bg-color: #3788d8;
+  --oc-event-border-color: #3788d8;
+  --oc-event-text-color: #fff;
+  --oc-event-selected-overlay-color: rgba(0, 0, 0, 0.25);
+
+  /* More link */
+  --oc-more-link-bg-color: #d0d0d0;
+  --oc-more-link-text-color: inherit;
+
+  /* Resizers */
+  --oc-event-resizer-thickness: 8px;
+  --oc-event-resizer-dot-total-width: 8px;
+  --oc-event-resizer-dot-border-width: 1px;
+
+  /* Backgrounds / highlights */
+  --oc-non-business-color: hsla(0, 0%, 84%, 0.3);
+  --oc-bg-event-color: #8fdf82;
+  --oc-bg-event-opacity: 0.3;
+  --oc-highlight-color: rgba(188, 232, 241, 0.3);
+  --oc-today-bg-color: rgba(255, 220, 40, 0.15);
+  --oc-now-indicator-color: red;
+
+  /* Daygrid / list dots */
+  --oc-daygrid-event-dot-width: 8px;
+  --oc-list-event-dot-width: 10px;
+  --oc-list-event-hover-bg-color: #f5f5f5;
+
+  /* OC extensions (our own) */
+  --oc-font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --oc-toolbar-title-size: 1.75em;
+}

@@ -1,0 +1,1196 @@
+/* src/oc/styles/oc.css
+ * OC 구조 스타일 — oc- 네임스페이스 구조 CSS.
+ */
+
+/* ---- Root ---- */
+.oc {
+  display: flex;
+  flex-direction: column;
+  font-size: 1em;
+  font-family: var(--oc-font-family);
+  width: 100%;
+}
+.oc,
+.oc *,
+.oc *::before,
+.oc *::after {
+  box-sizing: border-box;
+}
+.oc table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 1em;
+}
+.oc th {
+  text-align: center;
+}
+.oc td,
+.oc th {
+  padding: 0;
+  vertical-align: top;
+}
+.oc-direction-ltr {
+  direction: ltr;
+  text-align: left;
+}
+
+/* theme-standard borders */
+.oc-theme-standard td,
+.oc-theme-standard th {
+  border: 1px solid var(--oc-border-color);
+}
+
+/* ---- Toolbar (3열 그리드: 좌 · 중앙 제목 · 우) ---- */
+.oc .oc-toolbar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+.oc .oc-toolbar.oc-header-toolbar {
+  margin-bottom: 1.5em;
+}
+.oc .oc-toolbar-title {
+  font-size: var(--oc-toolbar-title-size);
+  margin: 0;
+  font-weight: 700;
+  white-space: nowrap;
+  text-align: center;
+}
+.oc-toolbar-chunk {
+  display: flex;
+  align-items: center;
+}
+.oc-toolbar-chunk:nth-child(1) {
+  justify-self: start;
+}
+.oc-toolbar-chunk:nth-child(2) {
+  justify-self: center;
+}
+.oc-toolbar-chunk:nth-child(3) {
+  justify-self: end;
+}
+.oc-direction-ltr .oc-toolbar > * > :not(:first-child) {
+  margin-left: 0.75em;
+}
+
+/* ---- Buttons ---- */
+.oc .oc-button {
+  -webkit-appearance: button;
+  appearance: button;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0.4em 0.65em;
+  text-align: center;
+  text-transform: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: 0.25em;
+  background-color: var(--oc-button-bg-color);
+  border-color: var(--oc-button-border-color);
+  color: var(--oc-button-text-color);
+  transition: background-color 0.1s, border-color 0.1s;
+}
+.oc .oc-button:hover {
+  background-color: var(--oc-button-hover-bg-color);
+  border-color: var(--oc-button-hover-border-color);
+}
+.oc .oc-button:disabled {
+  opacity: 0.65;
+  cursor: default;
+}
+.oc .oc-button:not(:disabled):active,
+.oc .oc-button.oc-button-active {
+  background-color: var(--oc-button-active-bg-color);
+  border-color: var(--oc-button-active-border-color);
+}
+.oc .oc-button-primary:focus {
+  box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);
+  outline: 0;
+}
+.oc .oc-icon-button {
+  padding: 0.4em 0.55em;
+}
+
+/* button group (connected) */
+.oc .oc-button-group {
+  display: inline-flex;
+  position: relative;
+  vertical-align: middle;
+}
+.oc .oc-button-group > .oc-button {
+  flex: 1 1 auto;
+  position: relative;
+}
+.oc .oc-button-group > .oc-button:hover,
+.oc .oc-button-group > .oc-button:active,
+.oc .oc-button-group > .oc-button.oc-button-active {
+  z-index: 1;
+}
+.oc-direction-ltr .oc-button-group > .oc-button:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-left: -1px;
+}
+.oc-direction-ltr .oc-button-group > .oc-button:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* ---- Toolbar buttons: 플랫 + 원형 호버 (Google 헤더 스타일) ---- */
+.oc-toolbar .oc-button {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  color: var(--oc-button-bg-color);
+  font-weight: 500;
+}
+.oc-toolbar .oc-button:hover {
+  background: rgba(0, 0, 0, 0.07);
+  border-color: transparent;
+}
+.oc-toolbar .oc-button:not(:disabled):active,
+.oc-toolbar .oc-button.oc-button-active {
+  background: rgba(0, 0, 0, 0.07);
+  border-color: transparent;
+}
+/* 클릭 후 남는 포커스 링 제거, 키보드 포커스에서만 표시 */
+.oc-toolbar .oc-button:focus {
+  box-shadow: none;
+  outline: none;
+}
+.oc-toolbar .oc-button:focus-visible {
+  box-shadow: 0 0 0 2px rgba(55, 136, 216, 0.5);
+}
+/* 뷰 토글 그룹: 연결형 해제 → 개별 플랫 버튼 */
+.oc-toolbar .oc-button-group {
+  gap: 2px;
+}
+.oc-toolbar .oc-button-group > .oc-button {
+  margin: 0 !important;
+  border-radius: 18px !important;
+}
+.oc-toolbar .oc-button-group > .oc-button.oc-button-active {
+  color: var(--oc-event-bg-color);
+  background: rgba(55, 136, 216, 0.14);
+  font-weight: 700;
+}
+/* 뷰 선택 드롭다운 (월/주/일/연/목록/타임라인/리소스) */
+.oc-toolbar .oc-view-select {
+  appearance: none;
+  -webkit-appearance: none;
+  font: inherit;
+  font-weight: 500;
+  color: var(--oc-button-bg-color);
+  background-color: transparent;
+  /* caret(▾) — currentColor 대신 고정 회색 화살표 */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%232c3e50' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.7em center;
+  border: 1px solid var(--oc-border-color);
+  border-radius: 18px;
+  padding: 0.4em 2em 0.4em 0.9em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.1s, border-color 0.1s;
+}
+.oc-toolbar .oc-view-select:hover {
+  background-color: rgba(0, 0, 0, 0.07);
+}
+.oc-toolbar .oc-view-select:focus {
+  outline: none;
+  border-color: var(--oc-event-bg-color);
+}
+.oc-toolbar .oc-view-select:focus-visible {
+  box-shadow: 0 0 0 2px rgba(55, 136, 216, 0.5);
+}
+/* 아이콘 버튼: 원형 + 원형 호버 */
+.oc-toolbar .oc-button-group > .oc-icon-button,
+.oc-toolbar .oc-icon-button {
+  border-radius: 50% !important;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  font-size: 1.15em;
+}
+
+/* ---- View harness ---- */
+.oc .oc-view-harness {
+  flex: none;
+  position: relative;
+}
+.oc .oc-view-harness > .oc-view {
+  position: absolute;
+  inset: 0;
+}
+
+/* ---- ScrollGrid ---- */
+.oc-scrollgrid {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--oc-border-color);
+  border-collapse: separate;
+}
+.oc-scrollgrid-section-header {
+  flex-shrink: 0;
+}
+.oc-scrollgrid-section-body {
+  flex: 1 1 0%;
+  min-height: 0;
+}
+.oc-scroller-harness {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+.oc-scroller {
+  position: relative;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* ---- Column header (weekdays) — table ---- */
+.oc-col-header-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+.oc-col-header-cell {
+  text-align: center;
+  background: var(--oc-page-bg-color);
+  border: 1px solid var(--oc-border-color);
+}
+
+.oc-col-header-cell-cushion {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 8px 0;
+  font-size: var(--oc-small-font-size);
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---- DayGrid body — flex 주 + 배경 grid + 전경 스패닝 레이어 ---- */
+.oc-daygrid-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.oc-daygrid-week {
+  position: relative;
+  flex: 1 1 0%;
+  min-height: 0;
+}
+/* 배경: 7열 날짜 셀 */
+.oc-daygrid-week-bg {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  height: 100%;
+}
+.oc-daygrid-day {
+  position: relative;
+  overflow: hidden;
+  border-right: 1px solid var(--oc-border-color);
+  border-bottom: 1px solid var(--oc-border-color);
+}
+.oc-daygrid-day:last-child {
+  border-right: none;
+}
+.oc-daygrid-week:last-child .oc-daygrid-day {
+  border-bottom: none;
+}
+.oc-daygrid-day.oc-day-other {
+  background-color: var(--oc-neutral-bg-color);
+}
+.oc-daygrid-day.oc-day-today {
+  background-color: var(--oc-today-bg-color);
+}
+.oc-daygrid-day-top {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.oc-day-other .oc-daygrid-day-top {
+  opacity: 0.3;
+}
+.oc-daygrid-day-number {
+  position: relative;
+  z-index: 1;
+  padding: 4px;
+  font-size: var(--oc-small-font-size);
+  color: inherit;
+  text-decoration: none;
+}
+.oc-daygrid-week-number {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  padding: 2px 5px;
+  font-size: var(--oc-small-font-size);
+  color: var(--oc-neutral-text-color);
+  background: var(--oc-neutral-bg-color);
+  border-bottom-right-radius: 3px;
+}
+/* 전경: 레벨별 스패닝 세그먼트 grid */
+.oc-daygrid-week-events {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  bottom: 0;
+  display: grid;
+  column-gap: 0;
+  row-gap: 1px;
+  pointer-events: none; /* 빈 영역은 배경 셀로 통과 (날짜 클릭/선택) */
+  z-index: 2;
+}
+.oc-daygrid-event-harness {
+  position: relative;
+  min-width: 0;
+  pointer-events: auto;
+}
+.oc-daygrid-more-harness {
+  display: flex;
+  align-items: flex-start;
+  min-width: 0;
+  pointer-events: auto;
+}
+/* 드래그/리사이즈/선택 중에는 세그먼트가 hit-test를 막지 않도록 */
+.oc-interacting .oc-daygrid-event-harness,
+.oc-interacting .oc-daygrid-more-harness {
+  pointer-events: none;
+}
+
+/* 비업무시간 음영 */
+.oc-non-business {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: var(--oc-non-business-color);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* 배경 이벤트 음영 (셀/시간대 전체) */
+.oc-bg-event {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: var(--oc-bg-event-opacity, 0.3);
+  pointer-events: none;
+}
+
+/* events */
+.oc-event {
+  cursor: pointer;
+  display: block;
+  font-size: var(--oc-small-font-size);
+  position: relative;
+}
+.oc-daygrid-event {
+  border-radius: 3px;
+  white-space: nowrap;
+}
+/* block (all-day / multi-day) */
+.oc-daygrid-block-event {
+  padding: 1px 1px;
+  background-color: var(--oc-event-bg-color);
+  border: 1px solid var(--oc-event-border-color);
+  color: var(--oc-event-text-color);
+}
+.oc-daygrid-block-event .oc-event-time {
+  font-weight: 700;
+  padding: 0 1px;
+}
+.oc-daygrid-block-event .oc-event-title {
+  padding: 0 1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* dot (timed) */
+.oc-daygrid-dot-event {
+  display: flex;
+  align-items: center;
+  padding: 2px 4px;
+  border-radius: 3px;
+  color: inherit;
+}
+.oc-daygrid-dot-event:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+.oc-daygrid-event-dot {
+  box-sizing: content-box;
+  width: 0;
+  height: 0;
+  border: calc(var(--oc-daygrid-event-dot-width) / 2) solid var(--oc-event-bg-color);
+  border-radius: calc(var(--oc-daygrid-event-dot-width) / 2);
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+.oc-daygrid-dot-event .oc-event-time {
+  flex-shrink: 0;
+  color: var(--oc-neutral-text-color);
+}
+.oc-daygrid-dot-event .oc-event-title {
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 700;
+}
+
+/* more link */
+.oc-daygrid-more-link {
+  display: inline-block;
+  cursor: pointer;
+  margin-top: 1px;
+  padding: 2px;
+  border-radius: 3px;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--oc-more-link-text-color);
+}
+.oc-daygrid-more-link:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* ---- TimeGrid (week/day) ---- */
+.oc-timegrid-view .oc-scrollgrid {
+  border: 1px solid var(--oc-border-color);
+}
+.oc-timegrid-header {
+  display: flex;
+  border-bottom: 1px solid var(--oc-border-color);
+}
+.oc-timegrid-axis {
+  flex-shrink: 0;
+  border-right: 1px solid var(--oc-border-color);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.oc-timegrid-axis-cushion {
+  font-size: var(--oc-small-font-size);
+  color: var(--oc-neutral-text-color);
+  padding: 4px;
+}
+.oc-timegrid-header-cols {
+  display: flex;
+  flex: 1 1 0%;
+}
+.oc-timegrid-col-header {
+  flex: 1 1 0%;
+  min-width: 0;
+  text-align: center;
+  border-right: 1px solid var(--oc-border-color);
+  background: var(--oc-page-bg-color);
+}
+.oc-timegrid-col-header:last-child {
+  border-right: none;
+}
+.oc-timegrid-col-header.oc-day-today {
+  background-color: var(--oc-today-bg-color);
+}
+
+/* all-day row */
+.oc-timegrid-allday {
+  display: flex;
+  border-bottom: 1px solid var(--oc-border-color);
+  min-height: 1.5em;
+}
+.oc-timegrid-allday-cols {
+  display: flex;
+  flex: 1 1 0%;
+}
+.oc-timegrid-allday-col {
+  flex: 1 1 0%;
+  min-width: 0;
+  border-right: 1px solid var(--oc-border-color);
+  padding: 1px 2px;
+}
+.oc-timegrid-allday-col:last-child {
+  border-right: none;
+}
+
+/* body */
+.oc-timegrid-body {
+  display: flex;
+  position: relative;
+}
+.oc-timegrid-axis-col {
+  flex-shrink: 0;
+  border-right: 1px solid var(--oc-border-color);
+}
+.oc-timegrid-slot-label {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  position: relative;
+  top: -0.7em;
+}
+.oc-timegrid-slot-label-cushion {
+  font-size: var(--oc-small-font-size);
+  color: var(--oc-neutral-text-color);
+  padding: 0 4px;
+  white-space: nowrap;
+}
+.oc-timegrid-cols {
+  display: flex;
+  flex: 1 1 0%;
+  position: relative;
+}
+.oc-timegrid-col {
+  flex: 1 1 0%;
+  min-width: 0;
+  position: relative;
+  border-right: 1px solid var(--oc-border-color);
+}
+.oc-timegrid-col:last-child {
+  border-right: none;
+}
+.oc-timegrid-col.oc-day-today {
+  background-color: var(--oc-today-bg-color);
+}
+.oc-timegrid-col-bg {
+  position: absolute;
+  inset: 0;
+}
+.oc-timegrid-slot {
+  border-bottom: 1px solid var(--oc-border-color);
+  box-sizing: border-box;
+}
+.oc-timegrid-now-indicator-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 2px solid var(--oc-now-indicator-color);
+  z-index: 5;
+  pointer-events: none;
+}
+.oc-timegrid-col-events {
+  position: absolute;
+  inset: 0;
+}
+.oc-timegrid-event {
+  position: absolute;
+  border-radius: 3px;
+  border: 1px solid var(--oc-event-border-color);
+  background: var(--oc-event-bg-color);
+  color: var(--oc-event-text-color);
+  font-size: var(--oc-small-font-size);
+  padding: 1px 3px;
+  overflow: hidden;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.oc-timegrid-event .oc-event-time {
+  font-weight: 700;
+}
+.oc-timegrid-event .oc-event-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---- List view ---- */
+.oc-list-view {
+  border: 1px solid var(--oc-border-color);
+}
+.oc-list-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--oc-neutral-text-color);
+}
+.oc-list-day {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  background: var(--oc-neutral-bg-color);
+  padding: 0 14px;
+  font-weight: 700;
+  border-bottom: 1px solid var(--oc-border-color);
+  border-top: 1px solid var(--oc-border-color);
+}
+.oc-list-event {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--oc-border-color);
+  cursor: pointer;
+}
+.oc-list-event:hover {
+  background: var(--oc-list-event-hover-bg-color);
+}
+.oc-list-event-time {
+  width: 150px;
+  flex-shrink: 0;
+  padding: 0 14px;
+  font-size: var(--oc-small-font-size);
+  white-space: nowrap;
+}
+.oc-list-event-graphic {
+  width: 1.5em;
+  flex-shrink: 0;
+  text-align: center;
+}
+.oc-list-event-dot {
+  display: inline-block;
+  box-sizing: content-box;
+  width: 0;
+  height: 0;
+  border: calc(var(--oc-list-event-dot-width) / 2) solid var(--oc-event-bg-color);
+  border-radius: calc(var(--oc-list-event-dot-width) / 2);
+}
+.oc-list-event-title {
+  padding: 0 14px;
+  flex-grow: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- Timeline (resource) — 단일 스크롤러 + sticky + 가상화 ---- */
+.oc-timeline-view {
+  border: 1px solid var(--oc-border-color);
+  overflow: hidden;
+  height: 100%;
+}
+.oc-timeline-scroller {
+  height: 100%;
+  overflow: auto;
+}
+.oc-timeline-grid {
+  position: relative;
+}
+.oc-resource-title {
+  font-size: var(--oc-small-font-size);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.oc-resource-subtitle {
+  font-size: 0.75em;
+  color: var(--oc-neutral-text-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* 헤더(슬롯) — 상단 고정 */
+.oc-timeline-header-row {
+  display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: var(--oc-page-bg-color);
+  border-bottom: 1px solid var(--oc-border-color);
+}
+.oc-timeline-corner {
+  flex-shrink: 0;
+  position: sticky;
+  left: 0;
+  z-index: 4;
+  background: var(--oc-page-bg-color);
+  border-right: 1px solid var(--oc-border-color);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-weight: 700;
+  font-size: var(--oc-small-font-size);
+}
+.oc-timeline-slot-header {
+  flex-shrink: 0;
+  text-align: center;
+  font-size: var(--oc-small-font-size);
+  color: var(--oc-neutral-text-color);
+  border-right: 1px solid var(--oc-border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* 리소스 행 */
+.oc-timeline-row {
+  display: flex;
+  border-bottom: 1px solid var(--oc-border-color);
+}
+.oc-timeline-res-cell {
+  flex-shrink: 0;
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: var(--oc-page-bg-color);
+  border-right: 1px solid var(--oc-border-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 10px;
+}
+.oc-timeline-lane {
+  position: relative;
+  flex-shrink: 0;
+}
+.oc-timeline-slots-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  z-index: 0;
+}
+.oc-timeline-slot-col {
+  flex-shrink: 0;
+  border-right: 1px solid var(--oc-border-color);
+}
+.oc-timeline-event {
+  position: absolute;
+  top: 6px;
+  height: calc(100% - 12px);
+  border-radius: 3px;
+  border: 1px solid var(--oc-event-border-color);
+  background: var(--oc-event-bg-color);
+  color: var(--oc-event-text-color);
+  font-size: var(--oc-small-font-size);
+  padding: 1px 4px;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+
+/* ---- Event dialog ---- */
+.oc-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+.oc-dialog {
+  width: 380px;
+  max-width: 92vw;
+  background: var(--oc-page-bg-color);
+  border-radius: 6px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+.oc-dialog-header {
+  padding: 14px 16px;
+  font-weight: 700;
+  border-bottom: 1px solid var(--oc-border-color);
+}
+.oc-dialog-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.oc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: var(--oc-small-font-size);
+}
+.oc-field > span {
+  color: var(--oc-neutral-text-color);
+}
+.oc-field input[type='text'],
+.oc-field input:not([type]),
+.oc-field input[type='datetime-local'],
+.oc-field select {
+  padding: 8px;
+  border: 1px solid var(--oc-border-color);
+  border-radius: 4px;
+  font: inherit;
+}
+.oc-field-row {
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+.oc-color-swatches {
+  display: flex;
+  gap: 6px;
+}
+.oc-swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+.oc-swatch.active {
+  border-color: #111;
+}
+.oc-dialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-top: 1px solid var(--oc-border-color);
+}
+.oc-dialog-footer-right {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+.oc-dialog-delete {
+  background: var(--oc-event-bg-color);
+  background: #ef4444;
+  border-color: #ef4444;
+  color: #fff;
+}
+.oc-dialog-cancel {
+  background: #fff;
+  border: 1px solid var(--oc-border-color);
+  color: inherit;
+}
+
+/* ---- MultiMonth (year) ---- */
+.oc-multimonth-view {
+  height: 100%;
+  border: 1px solid var(--oc-border-color);
+  overflow: hidden;
+}
+.oc-multimonth-scroller {
+  height: 100%;
+  overflow-y: auto;
+}
+.oc-multimonth-grid-wrap {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+  padding: 16px;
+}
+.oc-multimonth-month {
+  min-width: 0;
+}
+.oc-multimonth-title {
+  font-weight: 700;
+  text-align: center;
+  padding: 4px 0 6px;
+  font-size: 1.05em;
+}
+.oc-multimonth-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+.oc-multimonth-weekday {
+  text-align: center;
+  font-size: 0.7em;
+  color: var(--oc-neutral-text-color);
+  padding: 2px 0;
+}
+/* 주(week) 행: 날짜 셀 배경 + 이벤트 막대 오버레이 */
+.oc-multimonth-week {
+  position: relative;
+}
+.oc-multimonth-week-bg {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+.oc-multimonth-day {
+  position: relative;
+  min-height: 40px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.72em;
+  color: var(--oc-text-primary, inherit);
+  padding: 2px 3px 0 0;
+}
+.oc-multimonth-daynum {
+  line-height: 1.2;
+}
+.oc-multimonth-day:hover {
+  background: var(--oc-neutral-bg-color);
+}
+.oc-multimonth-day.oc-day-other {
+  opacity: 0.3;
+}
+.oc-multimonth-day.oc-day-today .oc-multimonth-daynum {
+  background: var(--oc-event-bg-color);
+  color: #fff;
+  border-radius: 50%;
+  width: 1.4em;
+  height: 1.4em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+/* 이벤트 막대 오버레이 — 날짜 숫자(약 16px) 아래에 겹쳐 배치 */
+.oc-multimonth-week-events {
+  position: absolute;
+  top: 16px;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: 11px;
+  row-gap: 1px;
+  pointer-events: none;
+}
+.oc-multimonth-event {
+  pointer-events: auto;
+  height: 10px;
+  font-size: 0.6em;
+  line-height: 10px;
+  color: #fff;
+  padding: 0 2px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+.oc-multimonth-more {
+  pointer-events: auto;
+  font-size: 0.6em;
+  line-height: 10px;
+  color: var(--oc-neutral-text-color);
+  padding: 0 2px;
+  cursor: pointer;
+}
+
+/* ---- Settings view (그리드 자리에 인라인 표시) ---- */
+.oc-settings-view {
+  height: 100%;
+  border: 1px solid var(--oc-border-color);
+  background: var(--oc-page-bg-color);
+  overflow: hidden;
+}
+.oc-settings-inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.oc-settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  font-weight: 700;
+  border-bottom: 1px solid var(--oc-border-color);
+}
+.oc-settings-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 24px 24px;
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  column-gap: 40px;
+  row-gap: 0;
+  align-content: start;
+}
+.oc-settings-group-title {
+  grid-column: 1 / -1;
+  font-size: var(--oc-small-font-size);
+  font-weight: 700;
+  color: var(--oc-neutral-text-color);
+  margin: 18px 0 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--oc-border-color);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.oc-settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  font-size: 0.9em;
+  border-bottom: 1px solid var(--oc-neutral-bg-color);
+}
+.oc-settings-label {
+  flex: 1;
+  min-width: 0;
+}
+.oc-settings-control {
+  flex-shrink: 0;
+}
+.oc-settings-control select,
+.oc-settings-control input[type='number'],
+.oc-settings-control input[type='time'] {
+  padding: 4px 6px;
+  border: 1px solid var(--oc-border-color);
+  border-radius: 4px;
+  font: inherit;
+}
+.oc-settings-control input[type='number'] {
+  width: 60px;
+}
+.oc-settings-days {
+  display: flex;
+  gap: 3px;
+}
+.oc-settings-day {
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--oc-border-color);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.8em;
+}
+.oc-settings-day.active {
+  background: var(--oc-button-bg-color);
+  border-color: var(--oc-button-bg-color);
+  color: #fff;
+}
+
+/* ---- Popover (more link) ---- */
+.oc-popover {
+  position: absolute;
+  z-index: 9999;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--oc-border-color);
+  border-radius: 3px;
+  background: var(--oc-page-bg-color);
+}
+.oc-popover-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px;
+  background: var(--oc-neutral-bg-color);
+  font-weight: 700;
+}
+.oc-popover-body {
+  padding: 8px;
+  min-width: 220px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+.oc-popover-close {
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+/* ---- Drag and Resize Interaction Styling ---- */
+
+/* Original event dims while dragging or resizing */
+.oc-event-dragging-original {
+  opacity: 0.35 !important;
+}
+
+/* Resize Handles */
+.oc-event-resizer {
+  position: absolute;
+  z-index: 10;
+  user-select: none;
+}
+
+.oc-event-resizer-bottom {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--oc-event-resizer-thickness, 8px);
+  cursor: ns-resize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.oc-event-resizer-bottom::after {
+  content: '';
+  width: 16px;
+  height: 2px;
+  background-color: currentColor;
+  opacity: 0.4;
+  border-radius: 1px;
+  transition: opacity 0.2s, height 0.2s;
+}
+
+.oc-event:hover .oc-event-resizer-bottom::after {
+  opacity: 0.8;
+  height: 3px;
+}
+
+.oc-event-resizer-start {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--oc-event-resizer-thickness, 8px);
+  cursor: ew-resize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.oc-event-resizer-end {
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--oc-event-resizer-thickness, 8px);
+  cursor: ew-resize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.oc-event-resizer-start::after,
+.oc-event-resizer-end::after {
+  content: '';
+  width: 2px;
+  height: 12px;
+  background-color: currentColor;
+  opacity: 0.4;
+  border-radius: 1px;
+  transition: opacity 0.2s, width 0.2s;
+}
+
+.oc-event:hover .oc-event-resizer-start::after,
+.oc-event:hover .oc-event-resizer-end::after {
+  opacity: 0.8;
+  width: 3px;
+}
+
+/* Snap Guide — 점선 없이 배경색만(기존 배경 위에 겹쳐 더 진해짐) */
+.oc-event-snap-guide {
+  position: absolute;
+  background-color: var(--oc-highlight-color);
+  box-sizing: border-box;
+  pointer-events: none;
+  z-index: 8;
+}
+
+/* Floating Drag Ghost */
+.oc-event-drag-ghost {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  opacity: 0.75;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  border: 1px solid var(--oc-event-border-color);
+  background-color: var(--oc-event-bg-color);
+  color: var(--oc-event-text-color);
+  font-size: var(--oc-small-font-size);
+  padding: 4px 8px;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+

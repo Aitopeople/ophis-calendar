@@ -1,0 +1,50 @@
+/* src/index.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #eef2f7;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+#root {
+  /* 너비 기준 자연 높이 프레임 */
+  width: 90%;
+  max-width: 1100px;
+  height: auto;
+  margin: 24px 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  background: var(--oc-page-bg-color, #fff);
+  border: 1px solid var(--oc-border-color, #ddd);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  padding: 20px 16px;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+/* Scrollbar customization for the entire page */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
